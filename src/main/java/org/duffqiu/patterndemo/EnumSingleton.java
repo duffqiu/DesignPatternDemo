@@ -1,5 +1,5 @@
 /**
- * test Post-Receive Hooks
+ * test git polling
  */
 package org.duffqiu.patterndemo;
 
