@@ -1,0 +1,18 @@
+@startuml
+
+title Template Method (Extends Abstract Class) Design Pattern
+
+abstract class AbstractParentClass <|-- class ChildClass1
+abstract class AbstractParentClass <|-- class ChildClass2
+abstract class AbstractParentClass <|-- class ChildClass3
+
+abstract class AbstractParentClass {
++ void operation()
++ abstract void abstractOperation()
+}
+
+ChildClass1 : + void abstractOperation()
+ChildClass2 : + void abstractOperation()
+ChildClass3 : + void abstractOperation()
+
+@enduml

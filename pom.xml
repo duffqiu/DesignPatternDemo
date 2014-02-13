@@ -111,7 +111,28 @@
 	         <xmlOutput>true</xmlOutput>
 	       </configuration>
 	     </plugin>
-            
+    <plugin>
+      <groupId>com.github.jeluard</groupId>
+      <artifactId>plantuml-maven-plugin</artifactId>
+      <version>7954</version>
+      <configuration>
+        <graphvizDot>/opt/local/bin/dot</graphvizDot>
+        <sourceFiles>
+          <directory>${basedir}</directory>
+          <includes>
+            <include>src/main/plantuml/*.txt</include>
+          </includes>
+        </sourceFiles>
+      </configuration>
+      <dependencies>
+        <dependency>
+          <groupId>net.sourceforge.plantuml</groupId>
+          <artifactId>plantuml</artifactId>
+          <version>7991</version>
+        </dependency>
+      </dependencies>
+    </plugin>
+                
     </plugins>
 
   </build>
