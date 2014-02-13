@@ -1,0 +1,16 @@
+@startuml
+
+title Template method (Callback) design pattern
+
+
+class MainClass ..|> interface MainInterface
+interface MainInterface ..> interface CallbackInterface
+class CallbackClass ..|> interface CallbackInterface
+
+MainInterface : + void operation(callback : CallbackInterface)
+CallbackInterface : void callbackMethod()
+
+CallbackClass : void callbackMethod()
+MainClass : + void operation(callback : CallbackInterface)
+
+@enduml
