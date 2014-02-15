@@ -20,4 +20,13 @@ public class ConcreteFactory implements Factory {
 	return new ConcreteProduct();
     }
 
+    /*
+     * (non-Javadoc)
+     * @see org.duffqiu.patterndemo.factorymethod.Factory#destroyProduct()
+     */
+    @Override
+    public void destroyProduct() {
+
+    }
+
 }

@@ -17,11 +17,16 @@ class Client{
 + void Client(Factory factory)
 + void doSomething()
 }
+class BuffFactory {
++ Product createProduct()
+}
 
 'relationship
 Factory<|.. ConcreteFactory
 Product<|..ConcreteProduct
 ConcreteFactory..>ConcreteProduct
 Client..>Factory
+Factory<|.. BuffFactory
+BuffFactory..>ConcreteProduct
 
 @enduml
