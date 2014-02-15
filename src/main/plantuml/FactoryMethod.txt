@@ -22,6 +22,6 @@ class Client{
 Factory<|.. ConcreteFactory
 Product<|..ConcreteProduct
 ConcreteFactory..>ConcreteProduct
-Client-->Factory
+Client..>Factory
 
 @enduml
