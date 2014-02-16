@@ -1,0 +1,21 @@
+@startuml
+
+title Static Factory Method design pattern
+
+interface Product
+
+class ConcreteProduct{
++static Product createProduct()
+}
+
+class Client{
++ void doSomething()
+}
+
+Product<|..ConcreteProduct
+ConcreteProduct..>Product
+
+Client..>ConcreteProduct
+
+
+@enduml
