@@ -31,7 +31,7 @@ import org.junit.Test;
 public class FactoryMethodTest {
 
     @Test
-    public void testSayHi() {
+    public final void testSayHi() {
 	Client client = new Client(new ConcreteFactory());
 
 	int result = client.doSomething();
@@ -40,7 +40,7 @@ public class FactoryMethodTest {
     }
 
     @Test
-    public void testBufferFactoryInOneThread() {
+    public final void testBufferFactoryInOneThread() {
 	Factory factory = new BuffFactory();
 	Product product1 = factory.createProduct();
 	Product product2 = factory.createProduct();
@@ -51,8 +51,8 @@ public class FactoryMethodTest {
     }
 
     @Test
-    public void testBufferFactoryInMulitThread() throws InterruptedException,
-	    ExecutionException {
+    public final void testBufferFactoryInMulitThread()
+	    throws InterruptedException, ExecutionException {
 	int threadNum = Runtime.getRuntime().availableProcessors() + 1;
 
 	//	final List<Product> productList = new Vector<>();
@@ -96,7 +96,7 @@ public class FactoryMethodTest {
     }
 
     @Test
-    public void testBufferFactoryMulitThreadInLocalBuffStorage()
+    public final void testBufferFactoryMulitThreadInLocalBuffStorage()
 	    throws InterruptedException, ExecutionException {
 	int threadNum = Runtime.getRuntime().availableProcessors() + 1;
 

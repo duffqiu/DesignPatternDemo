@@ -24,7 +24,8 @@ import org.junit.Test;
 public class SerialibleSingletonTest {
 
     @Test
-    public void testCodeSerial() throws IOException, ClassNotFoundException {
+    public final void testCodeSerial() throws IOException,
+	    ClassNotFoundException {
 
 	SerialibleSingleton a = SerialibleSingleton.getInstance();
 
@@ -46,7 +47,7 @@ public class SerialibleSingletonTest {
     }
 
     @Test
-    public void testSerialWithCommLang() {
+    public final void testSerialWithCommLang() {
 	SerialibleSingleton a = SerialibleSingleton.getInstance();
 
 	byte[] bytes = SerializationUtils.serialize(a);

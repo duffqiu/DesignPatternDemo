@@ -17,7 +17,7 @@ import org.junit.Test;
 public class EnumSingletonTest {
 
     @Test
-    public void testSerialibel() {
+    public final void testSerialibel() {
 	EnumSingleton a = EnumSingleton.INSTANCE;
 
 	byte[] bytes = SerializationUtils.serialize(a);
@@ -27,11 +27,13 @@ public class EnumSingletonTest {
     }
 
     @Test
-    public void testGetSet() {
+    public final void testGetSet() {
+
+	final int newAge = 30;
 	EnumSingleton a = EnumSingleton.INSTANCE;
 	EnumSingleton b = EnumSingleton.INSTANCE;
 
-	a.setAge(30);
+	a.setAge(newAge);
 	b.setName("test name");
 
 	assertThat(a.getName()).isEqualTo(b.getName());
