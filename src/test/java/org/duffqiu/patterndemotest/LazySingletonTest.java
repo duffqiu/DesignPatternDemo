@@ -24,7 +24,7 @@ import org.junit.Test;
 public class LazySingletonTest {
 
     @Test
-    public void testEquals() {
+    public final void testEquals() {
 
 	LazySingleton a = LazySingleton.getInstance();
 	LazySingleton b = LazySingleton.getInstance();
@@ -34,7 +34,7 @@ public class LazySingletonTest {
     }
 
     @Test
-    public void testMultithread() throws InterruptedException {
+    public final void testMultithread() throws InterruptedException {
 
 	int threadNum = Runtime.getRuntime().availableProcessors() + 1;
 
@@ -58,6 +58,8 @@ public class LazySingletonTest {
 	}
 
 	manager.invokeAll(tasks);
+
+	manager.shutdown();
 
 	manager.awaitTermination(2, TimeUnit.SECONDS);
 

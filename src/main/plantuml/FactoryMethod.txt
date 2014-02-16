@@ -1,0 +1,32 @@
+@startuml
+
+title Factory method design pattern
+
+'interface definition
+interface Factory{
++ Product createProduct()
+}
+interface Product
+
+'class definition
+class ConcreteFactory {
++ Product createProduct()
+}
+class ConcreteProduct
+class Client{
++ void Client(Factory factory)
++ void doSomething()
+}
+class BuffFactory {
++ Product createProduct()
+}
+
+'relationship
+Factory<|.. ConcreteFactory
+Product<|..ConcreteProduct
+ConcreteFactory..>ConcreteProduct
+Client..>Factory
+Factory<|.. BuffFactory
+BuffFactory..>ConcreteProduct
+
+@enduml
