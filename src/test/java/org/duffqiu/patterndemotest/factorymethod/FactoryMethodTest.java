@@ -70,8 +70,8 @@ public class FactoryMethodTest {
 		public Product call() throws Exception {
 
 		    Product p = factory.createProduct();
-		    System.out.println("[1] create product: " + p);
-		    //if not call destroy, the threadlocal will be shared 
+		    //		    System.out.println("[1] create product: " + p);
+		    //if not call removeProductFromBuf, the threadlocal will be shared 
 		    factory.removeProductFromBuf();
 		    return p;
 		}
@@ -88,7 +88,7 @@ public class FactoryMethodTest {
 	Product o = productList.get(0).get();
 
 	for (int i = 1; i < productList.size(); i++) {
-	    System.out.println("[4] " + o + " : " + productList.get(i).get());
+	    //	    System.out.println("[4] " + o + " : " + productList.get(i).get());
 	    assertThat(o).isNotSameAs(productList.get(i).get());
 
 	}
@@ -116,7 +116,7 @@ public class FactoryMethodTest {
 
 		    Product p = factory.createProduct();
 		    productList.add(p);
-		    System.out.println("[2] create product: " + p);
+		    //		    System.out.println("[2] create product: " + p);
 		    factory.removeProductFromBuf();
 		    return p;
 		}
@@ -133,7 +133,7 @@ public class FactoryMethodTest {
 	Product o = productList.get(0);
 
 	for (int i = 1; i < productList.size(); i++) {
-	    System.out.println("[3] " + o + " : " + productList.get(i));
+	    //	    System.out.println("[3] " + o + " : " + productList.get(i));
 	    assertThat(o).isNotSameAs(productList.get(i));
 
 	}
