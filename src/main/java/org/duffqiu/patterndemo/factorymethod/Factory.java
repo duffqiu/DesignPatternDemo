@@ -12,6 +12,6 @@ public interface Factory {
 
     Product createProduct();
 
-    void destroyProduct();
+    void removeProductFromBuf();
 
 }

@@ -45,7 +45,7 @@ public class FactoryMethodTest {
 	Product product1 = factory.createProduct();
 	Product product2 = factory.createProduct();
 	assertThat(product1).isSameAs(product2);
-	factory.destroyProduct();
+	factory.removeProductFromBuf();
 	product1 = factory.createProduct();
 	assertThat(product1).isNotSameAs(product2);
     }
@@ -72,7 +72,7 @@ public class FactoryMethodTest {
 		    Product p = factory.createProduct();
 		    System.out.println("[1] create product: " + p);
 		    //if not call destroy, the threadlocal will be shared 
-		    factory.destroyProduct();
+		    factory.removeProductFromBuf();
 		    return p;
 		}
 
@@ -80,6 +80,8 @@ public class FactoryMethodTest {
 	}
 
 	List<Future<Product>> productList = manager.invokeAll(tasks);
+
+	manager.shutdown();
 
 	manager.awaitTermination(2, TimeUnit.SECONDS);
 
@@ -115,7 +117,7 @@ public class FactoryMethodTest {
 		    Product p = factory.createProduct();
 		    productList.add(p);
 		    System.out.println("[2] create product: " + p);
-		    factory.destroyProduct();
+		    factory.removeProductFromBuf();
 		    return p;
 		}
 
@@ -123,6 +125,8 @@ public class FactoryMethodTest {
 	}
 
 	manager.invokeAll(tasks);
+
+	manager.shutdown();
 
 	manager.awaitTermination(2, TimeUnit.SECONDS);
 

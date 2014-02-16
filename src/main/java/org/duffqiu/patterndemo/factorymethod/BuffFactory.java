@@ -31,7 +31,7 @@ public class BuffFactory implements Factory {
 
     }
 
-    public final void destroyProduct() {
+    public final void removeProductFromBuf() {
 	products.remove();
     }
 

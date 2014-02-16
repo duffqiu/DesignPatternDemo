@@ -25,7 +25,7 @@ public class ConcreteFactory implements Factory {
      * @see org.duffqiu.patterndemo.factorymethod.Factory#destroyProduct()
      */
     @Override
-    public void destroyProduct() {
+    public void removeProductFromBuf() {
 
     }
 

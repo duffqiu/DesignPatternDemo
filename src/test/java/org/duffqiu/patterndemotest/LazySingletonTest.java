@@ -59,6 +59,8 @@ public class LazySingletonTest {
 
 	manager.invokeAll(tasks);
 
+	manager.shutdown();
+
 	manager.awaitTermination(2, TimeUnit.SECONDS);
 
 	LazySingleton b = litSingleton.get(0);
