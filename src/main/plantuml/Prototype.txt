@@ -1,0 +1,28 @@
+@startuml
+
+title Prototype Pattern Design
+
+interface Cloneable{
+}
+
+class Object{
++ Object clone()
+}
+
+class Product{
+- float price
+- String name
+
++ Object clone()
++ Product cloneProduct(String newName, float newPrice)
+}
+
+class Client
+
+Product..|>Cloneable
+Product--|>Object
+Client -->Product
+
+note right of Product : clone current product\n and reset name and price 
+
+@enduml
