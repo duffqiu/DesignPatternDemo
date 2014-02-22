@@ -3,6 +3,8 @@
  */
 package org.duffqiu.patterndemo.decorator;
 
+import com.google.inject.Inject;
+
 /**
  * @author macbook
  * 
@@ -22,6 +24,10 @@ public class SendMessageImpl implements ISendMessage {
     public final int sendMessage(String receiver, ReceiverType receiverType,
 	    String msg) {
 
+	if (!smpp.isConnected()) {
+	    smpp.connect();
+	}
+
 	if (receiverType == ReceiverType.MSISDN_TYPE) {
 	    SmppBody msgBody = new SmppBody(msg, 1, System.currentTimeMillis());
 	    return smpp.sendMessage(receiver, msgBody);
@@ -33,6 +39,7 @@ public class SendMessageImpl implements ISendMessage {
     /**
      * @param smpp
      */
+    @Inject
     public SendMessageImpl(SmppSendMsg smpp) {
 	super();
 	this.smpp = smpp;
