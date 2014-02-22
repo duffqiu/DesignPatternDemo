@@ -9,9 +9,13 @@ package org.duffqiu.patterndemo.decorator;
  *         2014年2月22日
  */
 public final class SmppSendMsg {
+
     private String serverURL = "";
+
     private int serverPort = 0;
+
     private String userName = "";
+
     private String passwd = "";
     private int connectStatus = -1;
 
@@ -69,5 +73,13 @@ public final class SmppSendMsg {
      */
     public void disConnect() {
 	connectStatus = -1;
+    }
+
+    public boolean isConnected() {
+	if (connectStatus == 0) {
+	    return true;
+	}
+
+	return false;
     }
 }
