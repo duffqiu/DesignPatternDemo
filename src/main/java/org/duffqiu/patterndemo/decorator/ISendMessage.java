@@ -10,6 +10,6 @@ package org.duffqiu.patterndemo.decorator;
  */
 public interface ISendMessage {
 
-    int sendMessage(String receiver, int receiverType, String msg);
+    int sendMessage(String receiver, ReceiverType receiverType, String msg);
 
 }
