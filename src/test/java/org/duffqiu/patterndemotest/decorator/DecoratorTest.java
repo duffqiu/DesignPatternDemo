@@ -5,11 +5,16 @@ package org.duffqiu.patterndemotest.decorator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.duffqiu.patterndemo.decorator.AuditEntry;
+import org.duffqiu.patterndemo.decorator.ConnectionDescription;
+import org.duffqiu.patterndemo.decorator.IAuditor;
 import org.duffqiu.patterndemo.decorator.IDescription;
 import org.duffqiu.patterndemo.decorator.ISendMessage;
+import org.duffqiu.patterndemo.decorator.MemAuditor;
 import org.duffqiu.patterndemo.decorator.ReceiverType;
 import org.duffqiu.patterndemo.decorator.SendMessageBindingModule;
 import org.duffqiu.patterndemo.decorator.SendMessageImpl;
+import org.duffqiu.patterndemo.decorator.SendMessageWithAuditImpl;
 import org.duffqiu.patterndemo.decorator.SmppSendMsg;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,6 +36,7 @@ public class DecoratorTest {
     public final void init() {
 	injector = Guice.createInjector(new SendMessageBindingModule());
 	sender = injector.getInstance(SendMessageImpl.class);
+
     }
 
     @Test
@@ -61,4 +67,54 @@ public class DecoratorTest {
 	assertThat(desc.getTargetDescription()).describedAs(
 	        "This is the default description");
     }
+
+    @Test
+    public final void testSendMsgWithAuitWithInject() {
+	SendMessageWithAuditImpl auditSender = injector
+	        .getInstance(SendMessageWithAuditImpl.class);
+
+	int status = auditSender.sendMessage("18680225631",
+	        ReceiverType.MSISDN_TYPE, "test send smpp msg");
+
+	assertThat(status).isEqualTo(0);
+
+	AuditEntry entry = auditSender.getLasterEntry();
+
+	assertThat(entry.getReceiver()).describedAs("18680225631");
+	assertThat(entry.getMsg()).describedAs("test send smpp msg");
+	assertThat(entry.getReceiverType()).isEqualTo(ReceiverType.MSISDN_TYPE);
+	assertThat(entry.getTimeStamp()).isNotZero();
+
+	IDescription desc = auditSender.getDesc();
+	assertThat(desc.getTargetId()).describedAs("Audit with SMPP");
+	assertThat(desc.getTargetDescription()).describedAs(
+	        "Send Msg with audit via SMPP");
+    }
+
+    @Test
+    public final void testSendMsgWithAuitWithNew() {
+	IDescription desc = new ConnectionDescription("Audit with SMPP",
+	        "Send Msg with audit via SMPP by new");
+	IAuditor auditor = new MemAuditor();
+
+	ISendMessage senderNew = new SendMessageWithAuditImpl(this.sender,
+	        desc, auditor);
+
+	int status = senderNew.sendMessage("13533834738",
+	        ReceiverType.MSISDN_TYPE, "test send smpp msg to romanty");
+
+	assertThat(status).isEqualTo(0);
+
+	assertThat(senderNew).isInstanceOf(SendMessageWithAuditImpl.class);
+
+	SendMessageWithAuditImpl auditSender = (SendMessageWithAuditImpl) senderNew;
+	AuditEntry entry = auditSender.getLasterEntry();
+
+	assertThat(entry.getReceiver()).describedAs("13533834738");
+	assertThat(entry.getMsg()).describedAs("test send smpp msg to romanty");
+	assertThat(entry.getReceiverType()).isEqualTo(ReceiverType.MSISDN_TYPE);
+	assertThat(entry.getTimeStamp()).isNotZero();
+
+    }
+
 }
