@@ -3,11 +3,14 @@
  */
 package org.duffqiu.patterndemo.decorator;
 
+import com.google.inject.Singleton;
+
 /**
  * @author macbook
  * 
  *         2014年2月22日
  */
+@Singleton
 public final class SmppSendMsg {
 
     private String serverURL = "";

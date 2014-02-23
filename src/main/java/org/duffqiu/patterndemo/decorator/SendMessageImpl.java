@@ -12,7 +12,11 @@ import com.google.inject.Inject;
  */
 public class SendMessageImpl implements ISendMessage {
 
+    @Inject
     private SmppSendMsg smpp;
+
+    @Inject
+    private IDescription desc;
 
     /*
      * (non-Javadoc)
@@ -25,7 +29,10 @@ public class SendMessageImpl implements ISendMessage {
 	    String msg) {
 
 	if (!smpp.isConnected()) {
-	    smpp.connect();
+	    int connectResult = smpp.connect();
+	    if (connectResult != 0) {
+		return -1;
+	    }
 	}
 
 	if (receiverType == ReceiverType.MSISDN_TYPE) {
@@ -37,12 +44,14 @@ public class SendMessageImpl implements ISendMessage {
     }
 
     /**
-     * @param smpp
+     * @return the desc
      */
-    @Inject
-    public SendMessageImpl(SmppSendMsg smpp) {
-	super();
-	this.smpp = smpp;
+    public final IDescription getDesc() {
+	return desc;
+    }
+
+    public SendMessageImpl() {
+
     }
 
 }
