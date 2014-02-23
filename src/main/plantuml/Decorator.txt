@@ -1,0 +1,32 @@
+@startuml
+
+title Decorator Design Pattern
+
+class SendMessageWithAuditImpl {
+	-ISendMessage sender
+	+ int sendMessage()
+	+ SendMessageWithAuditImpl(ISendMessage sender)
+}
+
+class SendMessageWithLogImpl {
+	-ISendMessage sender
+	+ int sendMessage()
+	SendMessageWithLogImpl(ISendMessage sender)
+}
+
+interface ISendMessage {
+	+ int sendMessage()
+}
+
+class SendMessageImpl {
+	+ int sendMessage()
+}
+
+ISendMessage <|.. SendMessageWithAuditImpl : <<realize>>
+ISendMessage <|.. SendMessageImpl
+ISendMessage <|.. SendMessageWithLogImpl
+
+SendMessageWithAuditImpl "1" o--> "  1"  ISendMessage : <<aggregate>>
+
+
+@enduml
