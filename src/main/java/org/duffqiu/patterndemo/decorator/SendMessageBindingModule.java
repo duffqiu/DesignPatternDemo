@@ -13,8 +13,6 @@ import com.google.inject.Singleton;
  */
 public class SendMessageBindingModule extends AbstractModule {
 
-    private SmppSendMsg sender;
-
     /*
      * (non-Javadoc)
      * @see com.google.inject.AbstractModule#configure()
