@@ -97,14 +97,17 @@ public class DecoratorTest {
 	        "Send Msg with audit via SMPP by new");
 	IAuditor auditor = new MemAuditor();
 
-	SendMessageWithAuditImpl auditSender = new SendMessageWithAuditImpl(
-	        sender, desc, auditor);
+	ISendMessage senderNew = new SendMessageWithAuditImpl(this.sender,
+	        desc, auditor);
 
-	int status = auditSender.sendMessage("13533834738",
+	int status = senderNew.sendMessage("13533834738",
 	        ReceiverType.MSISDN_TYPE, "test send smpp msg to romanty");
 
 	assertThat(status).isEqualTo(0);
 
+	assertThat(senderNew).isInstanceOf(SendMessageWithAuditImpl.class);
+
+	SendMessageWithAuditImpl auditSender = (SendMessageWithAuditImpl) senderNew;
 	AuditEntry entry = auditSender.getLasterEntry();
 
 	assertThat(entry.getReceiver()).describedAs("13533834738");
