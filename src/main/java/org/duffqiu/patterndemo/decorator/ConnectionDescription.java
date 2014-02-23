@@ -34,4 +34,18 @@ public class ConnectionDescription implements IDescription {
 	return description;
     }
 
+    /**
+     * @param id
+     * @param description
+     */
+    public ConnectionDescription(String id, String description) {
+	super();
+	this.id = id;
+	this.description = description;
+    }
+
+    public ConnectionDescription() {
+
+    }
+
 }
