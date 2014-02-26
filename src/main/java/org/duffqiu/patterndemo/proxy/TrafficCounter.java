@@ -16,7 +16,8 @@ public class TrafficCounter implements Statisticsable {
     private static final int SEGMENT_NUBMER_SECOND = ONE_SECOND / INTERNAL_TIME;
 
     private long currentCounter = 0;
-    private long[] counterList = new long[SEGMENT_NUBMER]; //total is one second
+    private long[] counterList = new long[SEGMENT_NUBMER]; //total is two second
+    private long[] counterTimeList = new long[SEGMENT_NUBMER]; //total is two second
     private long lastUpdateTime = System.currentTimeMillis();
     private int lastCounterIndex = 0;
     private long totalCounter = 0;
@@ -54,6 +55,7 @@ public class TrafficCounter implements Statisticsable {
 
 	//write the data into list
 	counterList[lastCounterIndex] = currentCounter;
+	counterTimeList[lastCounterIndex] = lastUpdateTime;
 
 	return lastUpdateTime;
     }
@@ -107,19 +109,29 @@ public class TrafficCounter implements Statisticsable {
 	int firstIndexLastSecond = 0;
 
 	if (currentCounterIndex < (SEGMENT_NUBMER_SECOND - 1)) {
-	    firstIndexLastSecond = currentCounterIndex + SEGMENT_NUBMER_SECOND
-		    + 1;
+	    firstIndexLastSecond = currentCounterIndex + SEGMENT_NUBMER_SECOND + 1;
 	} else {
-	    firstIndexLastSecond = currentCounterIndex + 1
-		    - SEGMENT_NUBMER_SECOND;
+	    firstIndexLastSecond = currentCounterIndex - SEGMENT_NUBMER_SECOND  + 1;
 	}
 
 	for (int i = 0; i < SEGMENT_NUBMER_SECOND; i++) {
 	    int index = (firstIndexLastSecond + i) % SEGMENT_NUBMER;
 	    oneSecondTPS += counterList[index];
 	    System.out.println("get index: " + index + " value: "
-		    + counterList[index]);
+		    + counterList[index] + ", update time: " + counterTimeList[index]);
 	}
+	
+	//include previous data
+	int previousIndex = (firstIndexLastSecond - 1 + SEGMENT_NUBMER) % SEGMENT_NUBMER;
+	
+	if ((currentTime - counterTimeList[previousIndex]) <= ONE_SECOND) {
+		
+		oneSecondTPS += counterList[previousIndex];
+		
+		System.out.println("append previous index: " + previousIndex + " value: "
+			    + counterList[previousIndex] + ", update time: " + counterTimeList[previousIndex]);
+	}
+		
 
 	System.out.println("return current tps: " + oneSecondTPS);
 
@@ -133,8 +145,12 @@ public class TrafficCounter implements Statisticsable {
      */
     private void clearCountList() {
 	//	System.out.println("clear list");
-	for (long counter : counterList) {
-	    counter = 0;
+	for (int i = 0; i < counterList.length; i++) {
+		counterList[i] = 0;
+	}
+	
+	for (int i = 0; i < counterTimeList.length; i++) {
+		counterTimeList[i] = System.currentTimeMillis();
 	}
 
 	currentCounter = 0;

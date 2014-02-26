@@ -95,7 +95,7 @@ public class TrafficCounterTest {
 	for (int i = 0; i < increaseNumber1; i++) {
 	    counter.increase();
 	}
-	System.out.println("time: " + System.currentTimeMillis()
+	System.out.println("[test]time: " + System.currentTimeMillis()
 	        + " increase: " + increaseNumber1 + " tps: "
 	        + counter.currentTPS());
 
@@ -107,7 +107,7 @@ public class TrafficCounterTest {
 	    counter.increase();
 	}
 
-	System.out.println("time: " + System.currentTimeMillis()
+	System.out.println("[test]time: " + System.currentTimeMillis()
 	        + " increase: " + increaseNumber2 + " tps: "
 	        + counter.currentTPS());
 	Thread.sleep(500);
@@ -117,7 +117,7 @@ public class TrafficCounterTest {
 	for (int i = 0; i < increaseNumber3; i++) {
 	    counter.increase();
 	}
-	System.out.println("time: " + System.currentTimeMillis()
+	System.out.println("[test]time: " + System.currentTimeMillis()
 	        + " increase: " + increaseNumber3 + " tps: "
 	        + counter.currentTPS());
 
@@ -129,14 +129,14 @@ public class TrafficCounterTest {
 	    counter.increase();
 	}
 
-	System.out.println("time: " + System.currentTimeMillis()
+	System.out.println("[test]time: " + System.currentTimeMillis()
 	        + " increase: " + increaseNumber4 + " tps: "
 	        + counter.currentTPS());
 
 	long current = counter.currentTPS();
 
 	System.out
-	        .println("time: "
+	        .println("[test]time: "
 	                + System.currentTimeMillis()
 	                + " tps: "
 	                + current
@@ -151,7 +151,7 @@ public class TrafficCounterTest {
 
 	current = counter.currentTPS();
 
-	System.out.println("time: " + System.currentTimeMillis() + " tps: "
+	System.out.println("[test]time: " + System.currentTimeMillis() + " tps: "
 	        + current
 	        + " increaseNumber2+ increaseNumber3 + increaseNumber4 "
 	        + (increaseNumber2 + increaseNumber3 + increaseNumber4));
@@ -163,7 +163,7 @@ public class TrafficCounterTest {
 
 	current = counter.currentTPS();
 
-	System.out.println("time: " + System.currentTimeMillis() + " tps: "
+	System.out.println("[test]time: " + System.currentTimeMillis() + " tps: "
 	        + current + "increaseNumber3 + increaseNumber4 "
 	        + (increaseNumber3 + increaseNumber4));
 
