@@ -85,4 +85,58 @@ public final class SmppSendMsg {
 
 	return false;
     }
+
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+	final int prime = 31;
+	int result = 1;
+	result = prime * result + connectStatus;
+	result = prime * result + ((passwd == null) ? 0 : passwd.hashCode());
+	result = prime * result + serverPort;
+	result = prime * result
+	        + ((serverURL == null) ? 0 : serverURL.hashCode());
+	result = prime * result
+	        + ((userName == null) ? 0 : userName.hashCode());
+	return result;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(Object obj) {
+	if (this == obj)
+	    return true;
+	if (obj == null)
+	    return false;
+	if (getClass() != obj.getClass())
+	    return false;
+	SmppSendMsg other = (SmppSendMsg) obj;
+	if (connectStatus != other.connectStatus)
+	    return false;
+	if (passwd == null) {
+	    if (other.passwd != null)
+		return false;
+	} else if (!passwd.equals(other.passwd))
+	    return false;
+	if (serverPort != other.serverPort)
+	    return false;
+	if (serverURL == null) {
+	    if (other.serverURL != null)
+		return false;
+	} else if (!serverURL.equals(other.serverURL))
+	    return false;
+	if (userName == null) {
+	    if (other.userName != null)
+		return false;
+	} else if (!userName.equals(other.userName))
+	    return false;
+	return true;
+    }
+
 }

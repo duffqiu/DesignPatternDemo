@@ -34,6 +34,13 @@ public final class LoggingDynamicProxy<T> implements InvocationHandler {
 	this.delegate = t;
     }
 
+    /**
+     * 
+     */
+    public LoggingDynamicProxy() {
+
+    }
+
     @SuppressWarnings("unchecked")
     public static <T> T createProxyInstance(T t) {
 

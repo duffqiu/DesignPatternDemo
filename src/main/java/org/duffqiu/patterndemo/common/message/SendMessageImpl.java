@@ -50,8 +50,45 @@ public class SendMessageImpl implements ISendMessage {
 	return desc;
     }
 
+    public final void setDesc(IDescription desc) {
+	this.desc = desc;
+    }
+
     public SendMessageImpl() {
 
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+	final int prime = 31;
+	int result = 1;
+	result = prime * result + ((smpp == null) ? 0 : smpp.hashCode());
+	return result;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(Object obj) {
+	if (this == obj)
+	    return true;
+	if (obj == null)
+	    return false;
+	if (getClass() != obj.getClass())
+	    return false;
+	SendMessageImpl other = (SendMessageImpl) obj;
+	if (smpp == null) {
+	    if (other.smpp != null)
+		return false;
+	} else if (!smpp.equals(other.smpp))
+	    return false;
+	return true;
     }
 
 }
