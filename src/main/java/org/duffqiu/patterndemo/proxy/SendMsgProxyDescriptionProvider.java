@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.duffqiu.patterndemo.decorator;
+package org.duffqiu.patterndemo.proxy;
 
 import org.duffqiu.patterndemo.common.message.ConnectionDescription;
 import org.duffqiu.patterndemo.common.message.IDescription;
@@ -11,10 +11,9 @@ import com.google.inject.Provider;
 /**
  * @author macbook
  * 
- *         2014年2月23日
+ *         2014年3月1日
  */
-public class SendMessageWithAuditDescriptionProvider implements
-        Provider<IDescription> {
+public class SendMsgProxyDescriptionProvider implements Provider<IDescription> {
 
     /*
      * (non-Javadoc)
@@ -24,8 +23,8 @@ public class SendMessageWithAuditDescriptionProvider implements
     public final IDescription get() {
 
 	return new ConnectionDescription(
-	        SendMessageWithAuditImpl.class.getSimpleName(),
-	        "Send Msg with audit via SMPP");
+	        SendMessageProxy.class.getSimpleName(),
+	        "Send message proxy description");
     }
 
 }

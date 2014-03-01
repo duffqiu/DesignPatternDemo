@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.duffqiu.patterndemo.decorator;
+package org.duffqiu.patterndemo.common.message;
 
 /**
  * @author macbook
@@ -19,7 +19,7 @@ public class ConnectionDescription implements IDescription {
      */
     @Override
     public final String getTargetId() {
-	// TODO Auto-generated method stub
+
 	return id;
     }
 
@@ -30,7 +30,7 @@ public class ConnectionDescription implements IDescription {
      */
     @Override
     public final String getTargetDescription() {
-	// TODO Auto-generated method stub
+
 	return description;
     }
 

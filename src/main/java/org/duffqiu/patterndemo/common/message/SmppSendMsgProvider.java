@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.duffqiu.patterndemo.decorator;
+package org.duffqiu.patterndemo.common.message;
 
 import com.google.inject.Provider;
 

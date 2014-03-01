@@ -1,12 +1,12 @@
 /**
  * 
  */
-package org.duffqiu.patterndemo.decorator;
+package org.duffqiu.patterndemo.proxy;
 
+import org.duffqiu.patterndemo.common.counter.IStatisticsable;
+import org.duffqiu.patterndemo.common.counter.TrafficCounter;
 import org.duffqiu.patterndemo.common.message.ConnectionDescription;
 import org.duffqiu.patterndemo.common.message.IDescription;
-import org.duffqiu.patterndemo.common.message.ISendMessage;
-import org.duffqiu.patterndemo.common.message.SendMessageImpl;
 import org.duffqiu.patterndemo.common.message.SmppSendMsg;
 import org.duffqiu.patterndemo.common.message.SmppSendMsgProvider;
 
@@ -17,9 +17,9 @@ import com.google.inject.name.Names;
 /**
  * @author macbook
  * 
- *         2014年2月22日
+ *         2014年3月1日
  */
-public class SendMessageBindingModule extends AbstractModule {
+public class SendMsgProxyBindingModule extends AbstractModule {
 
     /*
      * (non-Javadoc)
@@ -28,22 +28,19 @@ public class SendMessageBindingModule extends AbstractModule {
     @Override
     protected final void configure() {
 
-	//For SendMessageImpl
-	//use this instead of @provide if need singleton
+	//binding for SendMessage.class
 	bind(SmppSendMsg.class).toProvider(SmppSendMsgProvider.class).in(
 	        Singleton.class);
 	bind(IDescription.class).to(ConnectionDescription.class).in(
 	        Singleton.class);
 
-	//For SendMessageWithAuditImpl
-	bind(IDescription.class)
-	        .annotatedWith(Names.named("SendMsgWithAuditDesc"))
-	        .toProvider(SendMessageWithAuditDescriptionProvider.class)
+	//binding for SendMessageProxy.class
+	bind(IDescription.class).annotatedWith(Names.named("SendMsgProxyDesc"))
+	        .toProvider(SendMsgProxyDescriptionProvider.class)
 	        .in(Singleton.class);
 
-	bind(IAuditor.class).to(MemAuditor.class);
+	bind(IStatisticsable.class).to(TrafficCounter.class);
 
-	bind(ISendMessage.class).to(SendMessageImpl.class);
     }
 
 }

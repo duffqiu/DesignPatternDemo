@@ -28,6 +28,11 @@
     	<version>3.0</version>
     	<classifier>no_aop</classifier>
     </dependency>
+    <dependency>
+    	<groupId>com.google.guava</groupId>
+    	<artifactId>guava</artifactId>
+    	<version>16.0.1</version>
+    </dependency>
   </dependencies>
   <build>
     <sourceDirectory>src/main/java</sourceDirectory>

@@ -6,6 +6,8 @@ package org.duffqiu.patterndemo.decorator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.duffqiu.patterndemo.common.message.ReceiverType;
+
 /**
  * @author macbook
  * 

@@ -1,0 +1,43 @@
+@startuml
+
+title Proxy Design Pattern
+
+interface Subject  <<Interface>>{
+
++ doSomething()
+
+}
+
+class RealSubject {
+
++ doSomething()
+
+}
+
+
+class ProxySubject {
+
+- RealSubject realSubject
+
++ doSomething()
+
+}
+
+class Client
+
+Client-->Subject
+
+RealSubject..|>Subject
+ProxySubject..|>Subject
+
+ProxySubject*-->RealSubject
+
+note right of ProxySubject
+doSomething() \{
+  ...
+  realSubject.doSomething();
+  ...
+\}
+end note
+
+@enduml
