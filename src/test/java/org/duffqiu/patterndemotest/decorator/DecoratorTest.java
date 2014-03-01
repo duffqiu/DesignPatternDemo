@@ -63,8 +63,8 @@ public class DecoratorTest {
     @Test
     public final void testGuicePropertyBinding() {
 	IDescription desc = sender.getDesc();
-	assertThat(desc.getTargetId()).describedAs("Default ID");
-	assertThat(desc.getTargetDescription()).describedAs(
+	assertThat(desc.getTargetId()).isEqualTo("Default ID");
+	assertThat(desc.getTargetDescription()).isEqualTo(
 	        "This is the default description");
     }
 
@@ -80,14 +80,15 @@ public class DecoratorTest {
 
 	AuditEntry entry = auditSender.getLasterEntry();
 
-	assertThat(entry.getReceiver()).describedAs("18680225631");
-	assertThat(entry.getMsg()).describedAs("test send smpp msg");
+	assertThat(entry.getReceiver()).isEqualTo("18680225631");
+	assertThat(entry.getMsg()).isEqualTo("test send smpp msg");
 	assertThat(entry.getReceiverType()).isEqualTo(ReceiverType.MSISDN_TYPE);
 	assertThat(entry.getTimeStamp()).isNotZero();
 
 	IDescription desc = auditSender.getDesc();
-	assertThat(desc.getTargetId()).describedAs("Audit with SMPP");
-	assertThat(desc.getTargetDescription()).describedAs(
+	assertThat(desc.getTargetId()).isEqualTo(
+	        SendMessageWithAuditImpl.class.getSimpleName());
+	assertThat(desc.getTargetDescription()).isEqualTo(
 	        "Send Msg with audit via SMPP");
     }
 
@@ -110,8 +111,8 @@ public class DecoratorTest {
 	SendMessageWithAuditImpl auditSender = (SendMessageWithAuditImpl) senderNew;
 	AuditEntry entry = auditSender.getLasterEntry();
 
-	assertThat(entry.getReceiver()).describedAs("13533834738");
-	assertThat(entry.getMsg()).describedAs("test send smpp msg to romanty");
+	assertThat(entry.getReceiver()).isEqualTo("13533834738");
+	assertThat(entry.getMsg()).isEqualTo("test send smpp msg to romanty");
 	assertThat(entry.getReceiverType()).isEqualTo(ReceiverType.MSISDN_TYPE);
 	assertThat(entry.getTimeStamp()).isNotZero();
 
