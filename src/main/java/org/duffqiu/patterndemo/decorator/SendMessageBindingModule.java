@@ -32,12 +32,14 @@ public class SendMessageBindingModule extends AbstractModule {
 	//use this instead of @provide if need singleton
 	bind(SmppSendMsg.class).toProvider(SmppSendMsgProvider.class).in(
 	        Singleton.class);
-	bind(IDescription.class).to(ConnectionDescription.class);
+	bind(IDescription.class).to(ConnectionDescription.class).in(
+	        Singleton.class);
 
 	//For SendMessageWithAuditImpl
-	bind(IDescription.class).annotatedWith(
-	        Names.named("SendMsgWithAuditDesc")).toProvider(
-	        SendMessageWithAuditDescriptionProvider.class);
+	bind(IDescription.class)
+	        .annotatedWith(Names.named("SendMsgWithAuditDesc"))
+	        .toProvider(SendMessageWithAuditDescriptionProvider.class)
+	        .in(Singleton.class);
 
 	bind(IAuditor.class).to(MemAuditor.class);
 

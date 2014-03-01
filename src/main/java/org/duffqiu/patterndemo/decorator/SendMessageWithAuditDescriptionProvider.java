@@ -23,7 +23,8 @@ public class SendMessageWithAuditDescriptionProvider implements
     @Override
     public final IDescription get() {
 
-	return new ConnectionDescription("Audit with SMPP",
+	return new ConnectionDescription(
+	        SendMessageWithAuditDescriptionProvider.class.getSimpleName(),
 	        "Send Msg with audit via SMPP");
     }
 
