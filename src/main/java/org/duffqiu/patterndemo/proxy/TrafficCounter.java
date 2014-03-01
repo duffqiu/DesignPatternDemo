@@ -3,6 +3,8 @@
  */
 package org.duffqiu.patterndemo.proxy;
 
+import com.google.common.base.Preconditions;
+
 /**
  * @author macbook
  * 
@@ -88,52 +90,12 @@ public class TrafficCounter implements Statisticsable {
     @Override
     public final synchronized long currentTPS() {
 
-	long currentTime = System.currentTimeMillis();
-
-	System.out.println("current time: " + currentTime
-	        + " last update time: " + lastUpdateTime);
-
-	if ((currentTime - lastUpdateTime) > ONE_SECOND) {
-	    clearCountList();
-	    return 0;
-	}
-
 	long oneSecondTPS = 0;
+	this.clearDutyData();
 
-	int currentCounterIndex = (int) ((currentTime - lastUpdateTime + (lastUpdateTime % INTERNAL_TIME))
-	        / INTERNAL_TIME + lastCounterIndex);
-
-	clearDutyData(lastCounterIndex,
-	        (currentCounterIndex - lastCounterIndex));
-
-	int firstIndexLastSecond = 0;
-
-	if (currentCounterIndex < (SEGMENT_NUBMER_SECOND - 1)) {
-	    firstIndexLastSecond = currentCounterIndex + SEGMENT_NUBMER_SECOND + 1;
-	} else {
-	    firstIndexLastSecond = currentCounterIndex - SEGMENT_NUBMER_SECOND  + 1;
+	for (int i = 0; i < SEGMENT_NUBMER; i++) {
+	    oneSecondTPS += counterList[i];
 	}
-
-	for (int i = 0; i < SEGMENT_NUBMER_SECOND; i++) {
-	    int index = (firstIndexLastSecond + i) % SEGMENT_NUBMER;
-	    oneSecondTPS += counterList[index];
-	    System.out.println("get index: " + index + " value: "
-		    + counterList[index] + ", update time: " + counterTimeList[index]);
-	}
-	
-	//include previous data
-	int previousIndex = (firstIndexLastSecond - 1 + SEGMENT_NUBMER) % SEGMENT_NUBMER;
-	
-	if ((currentTime - counterTimeList[previousIndex]) <= ONE_SECOND) {
-		
-		oneSecondTPS += counterList[previousIndex];
-		
-		System.out.println("append previous index: " + previousIndex + " value: "
-			    + counterList[previousIndex] + ", update time: " + counterTimeList[previousIndex]);
-	}
-		
-
-	System.out.println("return current tps: " + oneSecondTPS);
 
 	return oneSecondTPS;
     }
@@ -146,11 +108,11 @@ public class TrafficCounter implements Statisticsable {
     private void clearCountList() {
 	//	System.out.println("clear list");
 	for (int i = 0; i < counterList.length; i++) {
-		counterList[i] = 0;
+	    counterList[i] = 0;
 	}
-	
+
 	for (int i = 0; i < counterTimeList.length; i++) {
-		counterTimeList[i] = System.currentTimeMillis();
+	    counterTimeList[i] = System.currentTimeMillis();
 	}
 
 	currentCounter = 0;
@@ -158,18 +120,43 @@ public class TrafficCounter implements Statisticsable {
 	lastUpdateTime = System.currentTimeMillis();
     }
 
-    private void clearDutyData(int startIndex, int length) {
+    private void clearDutyData() {
 
-	if (length <= 0) {
-	    return;
-	}
-
-	System.out.println("clear duty data: " + startIndex + ", length: "
-	        + length);
-	for (int i = 0; i < length - 1; i++) {
-	    int index = (startIndex + 1 + i) % SEGMENT_NUBMER;
-	    counterList[index] = 0;
+	long currentTime = System.currentTimeMillis();
+	for (int i = 0; i < SEGMENT_NUBMER; i++) {
+	    if (currentTime - this.counterTimeList[i] >= ONE_SECOND) {
+		counterList[i] = 0;
+	    }
 	}
     }
 
+    /**
+     * Only for test, tps needs to be tps % 5 == 0
+     * 
+     * @param startTime
+     * @param tps
+     *            macbook 2014年3月1日
+     */
+    public void initAvgTPS(long endTime, long tps) {
+
+	Preconditions.checkArgument((tps % (ONE_SECOND / INTERNAL_TIME) == 0));
+
+	long blockTps = tps / (ONE_SECOND / INTERNAL_TIME);
+
+	this.lastCounterIndex = 3;
+	this.initailTime = endTime - INTERNAL_TIME * SEGMENT_NUBMER;
+	this.lastUpdateTime = endTime;
+	this.currentCounter = blockTps;
+	this.totalCounter = blockTps * SEGMENT_NUBMER;
+
+	int timeIncrease = 1;
+	for (int i = lastCounterIndex + 1; i < counterList.length
+	        + lastCounterIndex + 1; i++) {
+	    counterList[(i % SEGMENT_NUBMER)] = blockTps;
+
+	    counterTimeList[(i % SEGMENT_NUBMER)] = initailTime
+		    + (timeIncrease++) * INTERNAL_TIME;
+	}
+
+    }
 }
