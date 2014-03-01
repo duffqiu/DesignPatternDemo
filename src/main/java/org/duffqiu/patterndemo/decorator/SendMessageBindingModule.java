@@ -8,6 +8,7 @@ import org.duffqiu.patterndemo.common.message.IDescription;
 import org.duffqiu.patterndemo.common.message.ISendMessage;
 import org.duffqiu.patterndemo.common.message.SendMessageImpl;
 import org.duffqiu.patterndemo.common.message.SmppSendMsg;
+import org.duffqiu.patterndemo.common.message.SmppSendMsgProvider;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;

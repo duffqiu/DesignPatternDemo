@@ -1,9 +1,7 @@
 /**
  * 
  */
-package org.duffqiu.patterndemo.decorator;
-
-import org.duffqiu.patterndemo.common.message.SmppSendMsg;
+package org.duffqiu.patterndemo.common.message;
 
 import com.google.inject.Provider;
 
