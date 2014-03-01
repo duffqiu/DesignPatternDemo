@@ -72,7 +72,7 @@ public class SendMessageProxy implements ISendMessage, IStatisticsable {
      * org.duffqiu.patterndemo.common.counter.IStatisticsable#totalCounter()
      */
     @Override
-    public long totalCounter() {
+    public final long totalCounter() {
 
 	return counter.totalCounter();
     }
@@ -82,7 +82,7 @@ public class SendMessageProxy implements ISendMessage, IStatisticsable {
      * @see org.duffqiu.patterndemo.common.counter.IStatisticsable#totalAvgTPS()
      */
     @Override
-    public double totalAvgTPS() {
+    public final double totalAvgTPS() {
 
 	return counter.totalAvgTPS();
     }
@@ -92,7 +92,7 @@ public class SendMessageProxy implements ISendMessage, IStatisticsable {
      * @see org.duffqiu.patterndemo.common.counter.IStatisticsable#currentTPS()
      */
     @Override
-    public long currentTPS() {
+    public final long currentTPS() {
 
 	return counter.currentTPS();
     }

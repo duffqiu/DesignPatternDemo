@@ -28,7 +28,7 @@ public class ProxyTest {
     private ISendMessage sender;
 
     @Before
-    public void init() {
+    public final void init() {
 	injector = Guice.createInjector(new SendMsgProxyBindingModule());
 	sender = injector.getInstance(SendMessageProxy.class);
     }
