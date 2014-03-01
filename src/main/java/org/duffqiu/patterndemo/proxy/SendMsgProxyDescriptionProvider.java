@@ -23,7 +23,7 @@ public class SendMsgProxyDescriptionProvider implements Provider<IDescription> {
     public final IDescription get() {
 
 	return new ConnectionDescription(
-	        SendMsgProxyDescriptionProvider.class.getSimpleName(),
+	        SendMessageProxy.class.getSimpleName(),
 	        "Send message proxy description");
     }
 
