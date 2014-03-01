@@ -3,6 +3,10 @@
  */
 package org.duffqiu.patterndemo.decorator;
 
+import org.duffqiu.patterndemo.common.message.IDescription;
+import org.duffqiu.patterndemo.common.message.ISendMessage;
+import org.duffqiu.patterndemo.common.message.ReceiverType;
+
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 

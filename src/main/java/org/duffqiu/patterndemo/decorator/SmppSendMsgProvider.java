@@ -3,6 +3,8 @@
  */
 package org.duffqiu.patterndemo.decorator;
 
+import org.duffqiu.patterndemo.common.message.SmppSendMsg;
+
 import com.google.inject.Provider;
 
 /**

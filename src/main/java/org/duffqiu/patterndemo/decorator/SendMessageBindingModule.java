@@ -3,6 +3,12 @@
  */
 package org.duffqiu.patterndemo.decorator;
 
+import org.duffqiu.patterndemo.common.message.ConnectionDescription;
+import org.duffqiu.patterndemo.common.message.IDescription;
+import org.duffqiu.patterndemo.common.message.ISendMessage;
+import org.duffqiu.patterndemo.common.message.SendMessageImpl;
+import org.duffqiu.patterndemo.common.message.SmppSendMsg;
+
 import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
 import com.google.inject.name.Names;
