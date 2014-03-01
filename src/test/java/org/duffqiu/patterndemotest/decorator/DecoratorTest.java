@@ -5,17 +5,17 @@ package org.duffqiu.patterndemotest.decorator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.duffqiu.patterndemo.common.message.ConnectionDescription;
+import org.duffqiu.patterndemo.common.message.IDescription;
+import org.duffqiu.patterndemo.common.message.ISendMessage;
+import org.duffqiu.patterndemo.common.message.ReceiverType;
+import org.duffqiu.patterndemo.common.message.SendMessageImpl;
+import org.duffqiu.patterndemo.common.message.SmppSendMsg;
 import org.duffqiu.patterndemo.decorator.AuditEntry;
-import org.duffqiu.patterndemo.decorator.ConnectionDescription;
 import org.duffqiu.patterndemo.decorator.IAuditor;
-import org.duffqiu.patterndemo.decorator.IDescription;
-import org.duffqiu.patterndemo.decorator.ISendMessage;
 import org.duffqiu.patterndemo.decorator.MemAuditor;
-import org.duffqiu.patterndemo.decorator.ReceiverType;
 import org.duffqiu.patterndemo.decorator.SendMessageBindingModule;
-import org.duffqiu.patterndemo.decorator.SendMessageImpl;
 import org.duffqiu.patterndemo.decorator.SendMessageWithAuditImpl;
-import org.duffqiu.patterndemo.decorator.SmppSendMsg;
 import org.junit.Before;
 import org.junit.Test;
 
