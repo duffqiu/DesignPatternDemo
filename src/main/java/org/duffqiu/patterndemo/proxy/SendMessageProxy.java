@@ -18,7 +18,7 @@ import com.google.inject.name.Named;
  * 
  *         2014年3月1日
  */
-public class SendMessageProxy implements ISendMessage {
+public class SendMessageProxy implements ISendMessage, IStatisticsable {
 
     @Inject
     private SendMessageImpl sender;
@@ -55,6 +55,46 @@ public class SendMessageProxy implements ISendMessage {
     public final IDescription getDesc() {
 
 	return desc;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.duffqiu.patterndemo.common.counter.IStatisticsable#increase()
+     */
+    @Override
+    public final long increase() {
+	throw new UnsupportedOperationException();
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * org.duffqiu.patterndemo.common.counter.IStatisticsable#totalCounter()
+     */
+    @Override
+    public long totalCounter() {
+
+	return counter.totalCounter();
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.duffqiu.patterndemo.common.counter.IStatisticsable#totalAvgTPS()
+     */
+    @Override
+    public double totalAvgTPS() {
+
+	return counter.totalAvgTPS();
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.duffqiu.patterndemo.common.counter.IStatisticsable#currentTPS()
+     */
+    @Override
+    public long currentTPS() {
+
+	return counter.currentTPS();
     }
 
 }
