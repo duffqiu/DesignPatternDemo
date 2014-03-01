@@ -24,7 +24,7 @@ public class SendMessageWithAuditDescriptionProvider implements
     public final IDescription get() {
 
 	return new ConnectionDescription(
-	        SendMessageWithAuditDescriptionProvider.class.getSimpleName(),
+	        SendMessageWithAuditImpl.class.getSimpleName(),
 	        "Send Msg with audit via SMPP");
     }
 
