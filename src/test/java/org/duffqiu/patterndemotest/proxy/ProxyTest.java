@@ -5,6 +5,8 @@ package org.duffqiu.patterndemotest.proxy;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.duffqiu.patterndemo.common.counter.IStatisticsable;
+import org.duffqiu.patterndemo.common.message.IDescription;
 import org.duffqiu.patterndemo.common.message.ISendMessage;
 import org.duffqiu.patterndemo.common.message.ReceiverType;
 import org.duffqiu.patterndemo.proxy.SendMessageProxy;
@@ -32,10 +34,26 @@ public class ProxyTest {
     }
 
     @Test
-    public void testProxy() {
+    public final void testProxy() {
 	int result = sender.sendMessage("13533834738",
 	        ReceiverType.MSISDN_TYPE, "test proxy");
 	assertThat(result).isEqualTo(0);
+
+	IStatisticsable counter = (IStatisticsable) sender;
+	assertThat(1L).isEqualTo(counter.currentTPS());
+
     }
 
+    @Test(expected = UnsupportedOperationException.class)
+    public final void testUnSupportedOperation() {
+	IStatisticsable counter = (IStatisticsable) sender;
+	counter.increase();
+    }
+
+    @Test
+    public final void testDescription() {
+	IDescription desc = sender.getDesc();
+	assertThat(desc.getTargetId()).isEqualTo(
+	        SendMessageProxy.class.getSimpleName());
+    }
 }
